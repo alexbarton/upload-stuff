@@ -17,6 +17,7 @@ ALL_RANDOM_LEN=16
 # Read in local configuration file, if available:
 CONFIG_FILE="${HOME}/.config/upload-stuff.conf"
 if [[ -r "${CONFIG_FILE}" ]]; then
+	# shellcheck source=/dev/null
 	. "${CONFIG_FILE}"
 fi
 
@@ -82,6 +83,7 @@ done
 # Iterate over all file names given:
 
 for file in "$@"; do
+	# shellcheck disable=SC1112 # "This is a unicode quote. Delete and retype it (or ignore/doublequote for literal)."
 	filename=$(basename "${file}" | tr -cd '[:print:]' | tr " '\"%#/\\" '_' | tr -ds '»«„“‘’:' '_-')
 	if [[ -n "${DO_RANDOM}" ]]; then
 		base="${filename%.*}"
