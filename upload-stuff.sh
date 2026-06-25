@@ -78,7 +78,10 @@ while [[ $# -gt 0 ]]; do
 	shift
 done
 
-[[ $# -ge 1 ]] || Usage
+if [[ $# -lt 1 ]]; then
+	# Oops, no file(s) given on the command line!
+	Usage; exit 1
+fi
 
 # Iterate over all file names given:
 
